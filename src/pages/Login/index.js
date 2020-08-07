@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import logoIn from "../../assets/login.svg";
@@ -12,7 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const books = useSelector((state) => state.reservedBooks);
+  const books = useSelector((state) => state.reservedBooks);
 
   const history = useHistory();
 
@@ -37,7 +37,7 @@ export default function Login() {
           alt="Be The Hero"
         />
 
-        {/* <p className="back-link">Livros selecionados: {books.length}</p> */}
+        <p className="back-link">Livros selecionados: {books.length}</p>
 
         <form onSubmit={goToReserve}>
           <h1>Entre com sua conta</h1>
@@ -55,8 +55,6 @@ export default function Login() {
           <button className="button" type="submit">
             Entrar
           </button>
-
-          <p className="back-link">Livros selecionados:</p>
         </form>
       </section>
       <img className="image-Login" src={logoIn} alt="Heroes" />

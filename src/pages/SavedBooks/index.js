@@ -1,5 +1,5 @@
 import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import crypton from "crypto";
 
@@ -8,22 +8,22 @@ import "./styles.css";
 
 import Header from "../../components/Header";
 
-// import * as BooksActions from "../../store/modules/books/actions";
+import * as BooksActions from "../../store/modules/books/actions";
 
 export default function SavedBooks() {
   // const selectedBooks = useSelector((state) => state.reservedBooks);
 
   const history = useHistory();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const selectedBooks = useSelector((state) => state.reservedBooks);
+  const selectedBooks = useSelector((state) => state.reservedBooks);
 
-  // const handleDeleteBook = (book) => {
-  // const deleteValue = selectedBooks.filter(
-  //   (deleteBook) => deleteBook.isbn === book.isbn
-  // );
-  // dispatch(BooksActions.deleteReserveBook(deleteValue));
-  // };
+  const handleDeleteBook = (book) => {
+    const deleteValue = selectedBooks.filter(
+      (deleteBook) => deleteBook.isbn !== book.isbn
+    );
+    dispatch(BooksActions.deleteReserveBook(deleteValue));
+  };
 
   const submitForm = (value) => {
     value.preventDefault();
@@ -40,27 +40,25 @@ export default function SavedBooks() {
       <form onSubmit={submitForm}>
         <h1>Minha reserva</h1>
         <ul>
-          <li>
-            <strong>LIVROS:</strong>
-            <p>Nome do livro</p>
+          {selectedBooks.map((books) => (
+            <li key={books.isbn}>
+              <strong>LIVROS:</strong>
+              <p>{books.name}</p>
 
-            <strong>DESCRIÇÃO:</strong>
-            <p>Drescrição do livro</p>
+              <strong>DESCRIÇÃO:</strong>
+              <p>{books.dresciption}</p>
 
-            <strong>ISBN:</strong>
-            <p>ISBN do livro</p>
+              <strong>ISBN:</strong>
+              <p>{books.isbn}</p>
 
-            <strong>Data locação:</strong>
-            {/* <p>{`${book.start_date} até ${book.end_date}`}</p> */}
+              <strong>Data locação:</strong>
+              <p>{books.reserved_At}</p>
 
-            {/* <button onClick={() => handleDeleteBook(book)} type="button">
-              <FiTrash2 size={20} color="a8a8b3" />
-            </button> */}
-
-            <button type="button">
-              <FiTrash2 size={20} color="a8a8b3" />
-            </button>
-          </li>
+              <button onClick={() => handleDeleteBook(books)} type="button">
+                <FiTrash2 size={20} color="a8a8b3" />
+              </button>
+            </li>
+          ))}
         </ul>
         <button className="button" type="submit">
           Reservar

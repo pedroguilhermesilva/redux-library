@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Header from "../../components/Header";
 import "./styles.css";
 
 import { books } from "../../api/index";
 
-// import * as BooksActions from "../../store/modules/books/actions";
+import * as BooksActions from "../../store/modules/books/actions";
 
 export default function Books() {
   const [data, setData] = useState([]);
 
   const history = useHistory();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const checkedBooks = (checked, book) => {
     if (checked) {
-      data.push(book);
+      setData([...data, book]);
     } else {
       const deletedBook = data.filter((hasBook) => hasBook.isbn !== book.isbn);
       setData(deletedBook);
@@ -28,7 +28,7 @@ export default function Books() {
     value.preventDefault();
 
     if (data.length > 0) {
-      // dispatch(BooksActions.reserveBooks(dataChange));
+      dispatch(BooksActions.reservedBooks(data));
       history.push("/login");
     } else {
       alert("É preciso selecionar no mínimo um livro");
