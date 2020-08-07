@@ -7,6 +7,8 @@ import "./styles.css";
 
 import { books } from "../../api/index";
 
+// import * as BooksActions from "../../store/modules/books/actions";
+
 export default function Books() {
   const [data, setData] = useState([]);
 
@@ -17,8 +19,8 @@ export default function Books() {
     if (checked) {
       data.push(book);
     } else {
-      const deleteBook = data.filter((hasBook) => hasBook.isbn !== book.isbn);
-      setData(deleteBook);
+      const deletedBook = data.filter((hasBook) => hasBook.isbn !== book.isbn);
+      setData(deletedBook);
     }
   };
 
@@ -26,7 +28,6 @@ export default function Books() {
     value.preventDefault();
 
     if (data.length > 0) {
-      console.log(data);
       // dispatch(BooksActions.reserveBooks(dataChange));
       history.push("/login");
     } else {
@@ -61,7 +62,7 @@ export default function Books() {
             ))}
           </ul>
           <button className="button" type="submit">
-            Comprar livros
+            Reservar livros
           </button>
         </form>
       </div>

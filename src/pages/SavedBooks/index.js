@@ -11,11 +11,12 @@ import Header from "../../components/Header";
 // import * as BooksActions from "../../store/modules/books/actions";
 
 export default function SavedBooks() {
-  // const selectedBooks = useSelector((state) => state.books.reserveBooks);
-  // const userName = useSelector((state) => state.users.name);
+  // const selectedBooks = useSelector((state) => state.reservedBooks);
 
   const history = useHistory();
   // const dispatch = useDispatch();
+
+  // const selectedBooks = useSelector((state) => state.reservedBooks);
 
   // const handleDeleteBook = (book) => {
   // const deleteValue = selectedBooks.filter(
@@ -31,10 +32,6 @@ export default function SavedBooks() {
     );
     history.push("/");
   };
-
-  // useEffect(() => {
-  //   dispatch(BooksActions.getReserveBook());
-  // }, [selectedBooks]);
 
   return (
     <div className="selected-books-container">
@@ -66,7 +63,7 @@ export default function SavedBooks() {
           </li>
         </ul>
         <button className="button" type="submit">
-          Comprar
+          Reservar
         </button>
       </form>
     </div>
